@@ -7,9 +7,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 
-download_dir = "/workspaces/extracao-b3-ingestao-s3/ArquivosCSV"  # Substitua pelo diretório de download correto
+download_dir = "/workspaces/extracao-b3-ingestao-s3/Arquivos CSV"  # Substitua pelo diretório de download correto
 
-def excluir_arquivos(diretorio):
+def excluir_arquivos(download_dir):
     try:
         # Listar todos os arquivos no diretório
         arquivos = os.listdir(download_dir)
@@ -74,6 +74,11 @@ def extrair_dados():
         # Listar arquivos no diretório de download para encontrar o mais recente
         files = os.listdir(download_dir)
         paths = [os.path.join(download_dir, basename) for basename in files if basename.endswith('.csv')]
+
+        # if not paths:
+        #             print("Nenhum arquivo CSV encontrado no diretório de download.")
+        #             return None
+
         newest_file = max(paths, key=os.path.getctime)
 
         print(f"Arquivo baixado: {newest_file}")
