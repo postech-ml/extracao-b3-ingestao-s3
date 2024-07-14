@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 
-download_dir = "/workspaces/extracao-b3-ingestao-s3/Arquivos CSV"  # Substitua pelo diretório de download correto
+download_dir = "/workspaces/extracao-b3-ingestao-s3/ArquivosCSV"  # Substitua pelo diretório de download correto
 
 def excluir_arquivos(diretorio):
     try:
