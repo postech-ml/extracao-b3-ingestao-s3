@@ -29,7 +29,7 @@ def excluir_arquivos(download_dir):
 
 def extrair_dados():
 
-    excluir_arquivos(download_dir)
+    
 
     # Configurar opções do Chrome
     chrome_options = webdriver.ChromeOptions()
@@ -75,9 +75,9 @@ def extrair_dados():
         files = os.listdir(download_dir)
         paths = [os.path.join(download_dir, basename) for basename in files if basename.endswith('.csv')]
 
-        # if not paths:
-        #             print("Nenhum arquivo CSV encontrado no diretório de download.")
-        #             return None
+        if not paths:
+                    print("Nenhum arquivo CSV encontrado no diretório de download.")
+                    return None
 
         newest_file = max(paths, key=os.path.getctime)
 
@@ -92,4 +92,5 @@ def extrair_dados():
         driver.quit()
 
 if __name__ == "__main__":
+    excluir_arquivos(download_dir)
     extrair_dados()
