@@ -1,6 +1,10 @@
 from extracao import extrair_dados
 from ingestao import Ingestao
+from flask import Flask
 
+app = Flask(__name__)
+
+@app.route('/')
 def chamar_extracao():
     try:
         csv_file = extrair_dados()
