@@ -24,7 +24,7 @@ def extrair_dados():
     
     # Inicializar o WebDriver
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
-    download_dir = "C:/Users/clebe/Downloads" 
+    download_dir = "/workspaces/extracao-b3-ingestao-s3" 
     try:
         driver.get("https://sistemaswebb3-listados.b3.com.br/indexPage/day/IBOV?language=pt-br")  # Substitua pela URL correta
 
