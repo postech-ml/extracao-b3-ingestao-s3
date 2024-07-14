@@ -98,8 +98,8 @@ def extrair_dados():
 
         # Esperar até que o link de download esteja disponível e clicar nele
         download_link = WebDriverWait(driver, 20).until(
-            EC.element_to_be_clickable((By.XPATH, '//a[contains(@class, "btn btn-b3 dwn")]'))
-        )
+       EC.element_to_be_clickable((By.XPATH, "//a[contains(text(), 'Download')]"))
+   )
         print("Link de download encontrado, clicando...")
         download_link.click()
 
