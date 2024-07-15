@@ -7,29 +7,27 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 
-download_dir = "/workspaces/extracao-b3-ingestao-s3/Arquivos CSV"  # Substitua pelo diretório de download correto
 
-def excluir_arquivos(download_dir):
-    try:
-        # Listar todos os arquivos no diretório
-        arquivos = os.listdir(download_dir)
+
+# def excluir_arquivos(download_dir):
+    # try:
+    #     # Listar todos os arquivos no diretório
+    #     arquivos = os.listdir(download_dir)
         
-        # Iterar sobre os arquivos e removê-los
-        for arquivo in arquivos:
-            caminho_arquivo = os.path.join(download_dir, arquivo)
-            if os.path.isfile(caminho_arquivo):
-                os.remove(caminho_arquivo)
-                print(f"Arquivo removido: {caminho_arquivo}")
-            else:
-                print(f"{caminho_arquivo} não é um arquivo.")
+    #     # Iterar sobre os arquivos e removê-los
+    #     for arquivo in arquivos:
+    #         caminho_arquivo = os.path.join(download_dir, arquivo)
+    #         if os.path.isfile(caminho_arquivo):
+    #             os.remove(caminho_arquivo)
+    #             print(f"Arquivo removido: {caminho_arquivo}")
+    #         else:
+    #             print(f"{caminho_arquivo} não é um arquivo.")
                 
-        print("Todos os arquivos foram removidos.")
-    except Exception as e:
-        print(f"Erro ao excluir arquivos: {e}")
+    #     print("Todos os arquivos foram removidos.")
+    # except Exception as e:
+    #     print(f"Erro ao excluir arquivos: {e}")
 
-def extrair_dados():
-
-    
+def extrair_dados(): 
 
     # Configurar opções do Chrome
     chrome_options = webdriver.ChromeOptions()
@@ -49,7 +47,7 @@ def extrair_dados():
         print(f"Erro ao inicializar o WebDriver: {e}")
         return None
 
-    
+    download_dir = "/workspaces/extracao-b3-ingestao-s3/Arquivos_CSV"  # Substitua pelo diretório de download corret
 
     # Verificar se o diretório de download existe
     if not os.path.exists(download_dir):
@@ -63,13 +61,13 @@ def extrair_dados():
 
         # Esperar até que o link de download esteja disponível e clicar nele
         download_link = WebDriverWait(driver, 20).until(
-       EC.element_to_be_clickable((By.XPATH, "//a[contains(text(), 'Download')]"))
-   )
+    EC.element_to_be_clickable((By.XPATH, "//a[contains(text(), 'Download')]"))
+)
         print("Link de download encontrado, clicando...")
         download_link.click()
 
         # Esperar um tempo para garantir que o download seja concluído
-        time.sleep(10)  # Ajuste o tempo conforme necessário
+        time.sleep(20)  # Ajuste o tempo conforme necessário
 
         # Listar arquivos no diretório de download para encontrar o mais recente
         files = os.listdir(download_dir)
@@ -92,5 +90,6 @@ def extrair_dados():
         driver.quit()
 
 if __name__ == "__main__":
-    excluir_arquivos(download_dir)
+    
+    # excluir_arquivos()
     extrair_dados()

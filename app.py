@@ -1,9 +1,9 @@
-from extracao import extrair_dados, excluir_arquivos
+from extracao import extrair_dados
 from ingestao import Ingestao
 
 def chamar_extracao():
-
-    excluir_arquivos()
+    # diretorio = "/workspaces/extracao-b3-ingestao-s3/Arquivos_CSV"
+    # excluir_arquivos(diretorio)
 
     try:
         csv_file = extrair_dados()
@@ -28,6 +28,6 @@ def chamar_ingestao(csv_file):
         print(f"Erro na ingestão: {e}")
 
 if __name__ == "__main__":
-    # download_dir = "/workspaces/extracao-b3-ingestao-s3/Arquivos CSV"
+    
     csv_file = chamar_extracao()
     # chamar_ingestao(csv_file)
