@@ -2,7 +2,7 @@ from extracao import extrair_dados
 from ingestao import Ingestao
 
 def chamar_extracao():
-    # diretorio = "/workspaces/extracao-b3-ingestao-s3/Arquivos_CSV"
+    # diretorio = "/workspaces/extracao-b3-ingestao-s3/arquivos_csv"
     # excluir_arquivos(diretorio)
 
     try:

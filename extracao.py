@@ -6,8 +6,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
-
-download_dir = "/workspaces/extracao-b3-ingestao-s3/Arquivo_CSV"  
+import stat
+download_dir = "/workspaces/extracao-b3-ingestao-s3"  
 
 # def excluir_arquivos(download_dir):
     # try:
@@ -27,6 +27,14 @@ download_dir = "/workspaces/extracao-b3-ingestao-s3/Arquivo_CSV"
     # except Exception as e:
     #     print(f"Erro ao excluir arquivos: {e}")
 
+def definir_permissoes(diretorio):
+    try:
+        # Definir permissões de leitura e escrita para o diretório
+        os.chmod(diretorio, stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO)
+        print(f"Permissões definidas para o diretório: {diretorio}")
+    except Exception as e:
+        print(f"Erro ao definir permissões: {e}")
+
 def extrair_dados(): 
 
     # Configurar opções do Chrome
@@ -40,6 +48,9 @@ def extrair_dados():
     chrome_options.add_argument("--disable-extensions")
     chrome_options.add_argument("--disable-infobars")
 
+    # Especificar a versão do Chrome manualmente
+    chrome_version = "126.0.6478.127"  # Substitua pela versão correta do seu Chrome
+
     # Inicializar o WebDriver
     try:
         driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
@@ -47,12 +58,23 @@ def extrair_dados():
         print(f"Erro ao inicializar o WebDriver: {e}")
         return None
 
-      
+     
+   
 
     # Verificar se o diretório de download existe
     if not os.path.exists(download_dir):
-        print(f"Diretório de download não encontrado: {download_dir}")
-        return None
+       os.makedirs(download_dir)
+
+    prefs = {
+       "download.default_directory": download_dir,
+       "download.prompt_for_download": False,
+       "download.directory_upgrade": True,
+       "safebrowsing.enabled": True
+   }
+    chrome_options.add_experimental_option("prefs", prefs)
+    definir_permissoes(download_dir)
+    
+    
 
     try:
         url = "https://sistemaswebb3-listados.b3.com.br/indexPage/day/IBOV?language=pt-br"  # Substitua pela URL correta
@@ -67,15 +89,15 @@ def extrair_dados():
         download_link.click()
 
         # Esperar um tempo para garantir que o download seja concluído
-        time.sleep(30)  # Ajuste o tempo conforme necessário
+        time.sleep(10)  # Ajuste o tempo conforme necessário
 
         # Listar arquivos no diretório de download para encontrar o mais recente
         files = os.listdir(download_dir)
         paths = [os.path.join(download_dir, basename) for basename in files if basename.endswith('.csv')]
 
-        # if not paths:
-        #             print("Nenhum arquivo CSV encontrado no diretório de download.")
-        #             return None
+        if not paths:
+                    print("Nenhum arquivo CSV encontrado no diretório de download.")
+                    return None
 
         newest_file = max(paths, key=os.path.getctime)
 
