@@ -2,9 +2,6 @@ from extracao import extrair_dados
 from ingestao import Ingestao
 
 def chamar_extracao():
-    # diretorio = "/workspaces/extracao-b3-ingestao-s3"
-    # excluir_arquivos(diretorio)
-
     try:
         csv_file = extrair_dados()
         if csv_file:

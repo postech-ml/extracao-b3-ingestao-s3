@@ -1,4 +1,5 @@
 import os
+import shutil
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -7,7 +8,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 import stat
+
 download_dir = "/workspaces/extracao-b3-ingestao-s3"  
+arquivos_csv_dir = "/workspaces/extracao-b3-ingestao-s3/arquivos_csv" 
 
 # def excluir_arquivos(download_dir):
     # try:
@@ -26,6 +29,14 @@ download_dir = "/workspaces/extracao-b3-ingestao-s3"
     #     print("Todos os arquivos foram removidos.")
     # except Exception as e:
     #     print(f"Erro ao excluir arquivos: {e}")
+
+def mover_arquivo(origem, destino):
+       try:
+           shutil.move(origem, destino)
+           print(f"Arquivo movido para: {destino}")
+       except Exception as e:
+           print(f"Erro ao mover arquivo: {e}")
+
 
 def definir_permissoes(diretorio):
     try:
@@ -102,12 +113,14 @@ def extrair_dados():
         newest_file = max(paths, key=os.path.getctime)
 
         print(f"Arquivo baixado: {newest_file}")
+
+        mover_arquivo(newest_file, os.path.join(arquivos_csv_dir, os.path.basename(newest_file)))
         return newest_file
 
     except Exception as e:
         print(f"Erro durante a extração: {e}")
         return None
-
+    
     finally:
         driver.quit()
 
