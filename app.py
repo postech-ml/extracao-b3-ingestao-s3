@@ -27,4 +27,4 @@ def chamar_ingestao(csv_file):
 if __name__ == "__main__":
     
     csv_file = chamar_extracao()
-    # chamar_ingestao(csv_file)
+    chamar_ingestao(csv_file)
