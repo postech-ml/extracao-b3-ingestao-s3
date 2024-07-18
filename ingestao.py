@@ -102,6 +102,8 @@ class Ingestao:
 
         # Ler os dados do CSV
         dados = pd.read_csv(csv_file)
+        #  Ler os dados do CSV com encoding latin1
+        dados = pd.read_csv(csv_file, encoding='latin1')
 
         # Transformar os dados em Parquet
         table = pa.Table.from_pandas(dados)

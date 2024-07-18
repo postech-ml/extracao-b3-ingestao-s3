@@ -114,7 +114,7 @@ def extrair_dados():
 
         print(f"Arquivo baixado: {newest_file}")
 
-        mover_arquivo(newest_file, os.path.join(arquivos_csv_dir, os.path.basename(newest_file)))
+        # mover_arquivo(newest_file, os.path.join(arquivos_csv_dir, os.path.basename(newest_file)))
         return newest_file
 
     except Exception as e:
