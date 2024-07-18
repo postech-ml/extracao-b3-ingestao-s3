@@ -79,6 +79,8 @@
 # if __name__ == "__main__":
 #     Ingestao.processar_dados()
 
+# 
+
 import pandas as pd
 import pyarrow as pa
 import pyarrow.parquet as pq
@@ -110,14 +112,13 @@ class Ingestao:
         print(f"Arquivo Parquet salvo em: {parquet_file}")
 
         # Upload para o S3
-        # s3_client = boto3.client('s3')
-        # bucket_name = "nome-do-seu-bucket"
-        # s3_key = f"raw/{datetime.now().strftime('%Y/%m/%d')}/{parquet_filename}"
-        # s3_client.upload_file(parquet_file, bucket_name, s3_key)
-        # print(f"Arquivo Parquet enviado para o S3: s3://{bucket_name}/{s3_key}")
+        s3_client = boto3.client('s3')
+        bucket_name = "nome-do-seu-bucket"
+        s3_key = f"raw/{datetime.now().strftime('%Y/%m/%d')}/{parquet_filename}"
+        s3_client.upload_file(parquet_file, bucket_name, s3_key)
+        print(f"Arquivo Parquet enviado para o S3: s3://{bucket_name}/{s3_key}")
 
 if __name__ == "__main__":
-    # Encontrar o arquivo CSV mais recente no diretório
     csv_dir = "/workspaces/extracao-b3-ingestao-s3/arquivos_csv"
     files = os.listdir(csv_dir)
     paths = [os.path.join(csv_dir, basename) for basename in files if basename.endswith('.csv')]
