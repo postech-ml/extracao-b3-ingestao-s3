@@ -29,8 +29,8 @@ def chamar_conversao(csv_file):
 
 def chamar_ingestao():
     try:
-        ingestor = Ingestao(nome_bucket="nome-do-seu-bucket")  # Substitua pelo nome do seu bucket
-        ingestor.carregar_parquet_mais_recente(caminho_diretorio="/caminho/do/diretorio")  # Substitua pelo caminho do diretório
+        ingestor = Ingestao(nome_bucket="dados-b3")  # Substitua pelo nome do seu bucket
+        ingestor.carregar_parquet_mais_recente(caminho_diretorio="/workspaces/extracao-b3-ingestao-s3/arquivos_parquet")  # Substitua pelo caminho do diretório
         print("Ingestão concluída com sucesso.")
     except Exception as e:
         print(f"Erro na ingestão: {e}")        

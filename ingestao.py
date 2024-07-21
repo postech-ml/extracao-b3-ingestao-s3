@@ -159,5 +159,5 @@ class Ingestao:
         print(f"Arquivo Parquet mais recente '{arquivo_mais_recente}' enviado para o bucket '{self.nome_bucket}' com a chave '{chave_s3}'.")
 
 # Utilize a classe Ingestao para fazer o upload do arquivo Parquet mais recente
-ingestor = Ingestao(nome_bucket="nome-do-seu-bucket")
-ingestor.carregar_parquet_mais_recente(caminho_diretorio="/caminho/do/diretorio")
+# ingestor = Ingestao(nome_bucket="nome-do-seu-bucket")
+# ingestor.carregar_parquet_mais_recente(caminho_diretorio="/caminho/do/diretorio")
