@@ -10,9 +10,9 @@ class Ingestao:
     def __init__(self, nome_bucket):
         self.nome_bucket = nome_bucket
         self.cliente_s3 = boto3.client('s3', 
-            aws_access_key_id='SEU_ACCESS_KEY_ID',
-            aws_secret_access_key='SEU_SECRET_ACCESS_KEY',
-            aws_session_token='SEU_SESSION_TOKEN'
+            aws_access_key_id= os.getenv('AWS_ACCESS_KEY_ID'),
+            aws_secret_access_key= os.getenv('AWS_SECRET_ACCESS_KEY'),
+            aws_session_token= os.getenv('SEU_SESSION_TOKEN')
         )
 
     def carregar_parquet_mais_recente(self, caminho_diretorio):
