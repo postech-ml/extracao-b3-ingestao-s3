@@ -136,6 +136,9 @@ import os
 import boto3
 from datetime import datetime
 import glob
+from dotenv import load_dotenv
+
+load_dotenv()  # Carrega as variáveis do arquivo .env
 
 class Ingestao:
     def __init__(self, nome_bucket):
@@ -143,6 +146,7 @@ class Ingestao:
         self.cliente_s3 = boto3.client('s3', 
             aws_access_key_id='SEU_ACCESS_KEY_ID',
             aws_secret_access_key='SEU_SECRET_ACCESS_KEY'
+            aws_session_token='SEU_SESSION_TOKEN'
         )
 
     def carregar_parquet_mais_recente(self, caminho_diretorio):
