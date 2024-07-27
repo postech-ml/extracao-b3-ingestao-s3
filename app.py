@@ -38,5 +38,6 @@ def chamar_ingestao():
 if __name__ == "__main__":
     
     csv_file = chamar_extracao()
+    # csv_file = "/workspaces/extracao-b3-ingestao-s3/IBOVDia_19-07-24.csv"
     chamar_conversao(csv_file)
     chamar_ingestao()
