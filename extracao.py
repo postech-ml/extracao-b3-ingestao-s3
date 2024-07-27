@@ -266,7 +266,7 @@ def extrair_dados():
 
 
         # Esperar um tempo para garantir que o download seja concluído
-        time.sleep(10)  # Ajuste o tempo conforme necessário
+        time.sleep(3)  # Ajuste o tempo conforme necessário
 
         # Listar arquivos no diretório de download para encontrar o mais recente
         files = os.listdir(download_dir)
